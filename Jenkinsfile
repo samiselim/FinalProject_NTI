@@ -58,7 +58,7 @@ pipeline {
               sh "sed -i 's|frontend-image:latest|${FRONTEND_REPO_URL}:${IMAGE_TAG}|g' k8s/frontend-deployment.yaml"
 
 
-              git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git
+              sh "git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git"
               git pull origin main
               git add .
               git commit -m "Update deployment image to version ${BUILD_NUMBER}"
