@@ -9,6 +9,13 @@ pipeline {
     AWS_ACCESS_KEY_ID = credentials('aws_access_key')
     AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')
     AWS_DEFAULT_REGION = "eu-west-3"
+    AWS_ACCOUNT_ID ='058264315018'
+    
+    ECR_BACKEND_NAME='nti-backend-image'
+    ECR_FRONTEND_NAME='nti-frontend-image'
+    IMAGE_TAG="${BUILD_NUMBER}"
+    BACKEND_REPO_URL = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_BACKEND_NAME}"
+    FRONTEND_REPO_URL = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${ECR_FRONTEND_NAME}"
   }
   stages {
     stage('Start The pipeline') {
@@ -18,13 +25,7 @@ pipeline {
     }
     stage('Build Image and Genereta Security Report using Trivy') {
       environment {
-        AWS_ACCOUNT_ID ='058264315018'
-        AWS_REGION='eu-west-3'
-        ECR_BACKEND_NAME='nti-backend-image'
-        ECR_FRONTEND_NAME='nti-frontend-image'
-        IMAGE_TAG="${BUILD_NUMBER}"
-        BACKEND_REPO_URL = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_BACKEND_NAME}"
-        FRONTEND_REPO_URL = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_FRONTEND_NAME}"
+       
 
       }
       steps {
@@ -49,18 +50,19 @@ pipeline {
         }
         steps {
             withCredentials([string(credentialsId: 'github_tocken', variable: 'GITHUB_TOKEN')]) {
-                sh '''
-                    git config user.email "jenkins@gmail.com"
-                    git config user.name "jenkins"
-                    BUILD_NUMBER=${BUILD_NUMBER}
-                    sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" java-maven-sonar-argocd-helm-k8s/spring-boot-app-manifests/deployment.yml
+                
+              sh "git config user.email jenkins@gmail.com"
+              sh "git config user.name jenkins"
+              sh "BUILD_NUMBER=${BUILD_NUMBER}"
+              sh "sed -i 's|backend-image:latest|${BACKEND_REPO_URL}:${IMAGE_TAG}|g' k8s/backend-deployment.yaml"
+              sh "sed -i 's|frontend-image:latest|${FRONTEND_REPO_URL}:${IMAGE_TAG}|g' k8s/frontend-deployment.yaml"
 
-                    git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/argoCd.git
-                    git pull origin main
-                    git add .
-                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                    git push origin HEAD:main
-                '''
+
+              git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git
+              git pull origin main
+              git add .
+              git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+              git push origin HEAD:main
             }
         }
     }

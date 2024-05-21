@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend-image:latest # Ensure to build and push this image to your registry
+        image: backend-image:latest 
         ports:
         - containerPort: 3001
         env:
