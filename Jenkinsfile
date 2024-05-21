@@ -24,10 +24,6 @@ pipeline {
       }
     }
     stage('Build Image and Genereta Security Report using Trivy') {
-      environment {
-       
-
-      }
       steps {
         script {
             dir('backend'){
