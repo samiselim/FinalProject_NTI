@@ -16,6 +16,7 @@ pipeline {
     stage('Start The Pipeline') {
       steps {
         sh 'echo Welcome To NTI Final Project DevOps Automation Track'
+        sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
       }
     }
     stage('Build Image and Generate Security Report using Trivy') {
@@ -25,11 +26,13 @@ pipeline {
             sh "docker build -t ${BACKEND_REPO_URL}:${IMAGE_TAG} ."
             sh "trivy image ${BACKEND_REPO_URL}:${IMAGE_TAG} > backend_scan.txt"
             sh "aws s3 cp backend_scan.txt s3://fp-statefile-bucket/"
+            sh "docker push ${BACKEND_REPO_URL}:${IMAGE_TAG}" 
           }
           dir('frontend') {
             sh "docker build -t ${FRONTEND_REPO_URL}:${IMAGE_TAG} ."
             sh "trivy image ${FRONTEND_REPO_URL}:${IMAGE_TAG} > frontend_scan.txt"
             sh "aws s3 cp frontend_scan.txt s3://fp-statefile-bucket/"
+            sh "docker push ${BACKEND_REPO_URL}:${IMAGE_TAG}" 
           }
         }
       }
