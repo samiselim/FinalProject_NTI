@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'samiselim/ubuntu:v2.0'
-      args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-    }
-  }
+  agent any
   environment {
     AWS_ACCESS_KEY_ID = credentials('aws_access_key')
     AWS_SECRET_ACCESS_KEY = credentials('aws_secret_key')

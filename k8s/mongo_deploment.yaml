@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: mongo
 spec:
+  serviceName: "mongo"
   replicas: 1
   selector:
     matchLabels:
@@ -25,19 +26,23 @@ spec:
         volumeMounts:
         - name: mongo-storage
           mountPath: /data/db
-      volumes:
-      - name: mongo-storage
-        persistentVolumeClaim:
-          claimName: mongo-pvc
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mongo
 spec:
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None
   selector:
     app: mongo
-  ports:
-    - protocol: TCP
-      port: 27017
-      targetPort: 27017
