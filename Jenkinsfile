@@ -42,8 +42,8 @@ pipeline {
         GIT_USER_NAME = "samiselim"
       }
       steps {
-          sh "sed -i 's|backend-image:latest|${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
-          sh "sed -i 's|frontend-image:latest|${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
+          sh "sed -i 's|backend-image:latest|${env.BACKEND_REPO_URL}:${env.BUILD_NUMBER}|g' ./k8s/backend_deployment.yaml"
+          sh "sed -i 's|frontend-image:latest|${env.FRONTEND_REPO_URL}:${env.BUILD_NUMBER}|g' ./k8s/frontend_deployment.yaml"
           // sh "kubectl apply -f k8s/frontend_deployment.yaml"
       }
     }
