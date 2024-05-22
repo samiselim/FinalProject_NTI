@@ -51,7 +51,7 @@ pipeline {
           sh 'git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git'
           sh 'git add .'
           sh "git commit -m 'Update deployment image to version ${BUILD_NUMBER}'"
-          sh 'git push origin HEAD:main'
+          sh 'git push origin main'
         }
       }
     }
