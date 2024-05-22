@@ -1,5 +1,5 @@
 
-058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:11 (alpine 3.17.3)
+058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:13 (alpine 3.17.3)
 ==================================================================================
 Total: 27 (UNKNOWN: 0, LOW: 2, MEDIUM: 23, HIGH: 2, CRITICAL: 0)
 
