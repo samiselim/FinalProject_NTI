@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: frontend-image:latest # Ensure to build and push this image to your registry
+        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:8 # Ensure to build and push this image to your registry
         ports:
         - containerPort: 3000
 ---
