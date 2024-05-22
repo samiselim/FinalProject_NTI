@@ -32,7 +32,7 @@ pipeline {
             sh "docker build -t ${FRONTEND_REPO_URL}:${IMAGE_TAG} ."
             sh "trivy image ${FRONTEND_REPO_URL}:${IMAGE_TAG} > frontend_scan.txt"
             sh "aws s3 cp frontend_scan.txt s3://fp-statefile-bucket/"
-            sh "docker push ${BACKEND_REPO_URL}:${IMAGE_TAG}" 
+            sh "docker push ${FRONTEND_REPO_URL}:${IMAGE_TAG}" 
           }
         }
       }
