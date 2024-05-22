@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:28058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:2827 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:28058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:28278 # Ensure to build and push this image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:28 to your registry
+        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:30
         ports:
         - containerPort: 3000
 ---
