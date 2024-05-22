@@ -45,10 +45,10 @@ pipeline {
         withCredentials([string(credentialsId: 'github_tocken', variable: 'GITHUB_TOKEN')]) {
           sh 'git config user.email "jenkins@gmail.com"'
           sh 'git config user.name "jenkins"'
-          sh "sed -i 's|backend-image:latest|${BACKEND_REPO_URL}:${IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
-          sh "sed -i 's|frontend-image:latest|${FRONTEND_REPO_URL}:${IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
+          sh "sed -i 's|backend-image:latest|${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
+          sh "sed -i 's|frontend-image:latest|${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
 
-          sh 'git remote set-url origin https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/FinalProject_NTI.git'
+          sh 'git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git'
           sh 'git add .'
           sh "git commit -m 'Update deployment image to version ${BUILD_NUMBER}'"
           sh 'git push origin HEAD:main'
