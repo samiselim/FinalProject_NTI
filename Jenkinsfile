@@ -45,8 +45,8 @@ pipeline {
         withCredentials([string(credentialsId: 'github_tocken', variable: 'GITHUB_TOKEN')]) {
           sh 'git config user.email "jenkins@gmail.com"'
           sh 'git config user.name "jenkins"'
-          sh "sed -i 's|image:|image:${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
-          sh "sed -i 's|image:|image:${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
+          sh "sed -i 's|image:*|image: ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
+          sh "sed -i 's|image:*|image: ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
 
           sh 'git remote set-url origin https://samiselim:${GITHUB_TOKEN}@github.com/samiselim/FinalProject_NTI.git'
           sh 'git add .'
