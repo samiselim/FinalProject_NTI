@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image:058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:27 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:278 
+        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:28058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:2827 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:28058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:28278 
         ports:
         - containerPort: 3001
         env:
