@@ -16,23 +16,23 @@ pipeline {
     stage('Start The Pipeline') {
       steps {
         sh 'echo Welcome To NTI Final Project DevOps Automation Track'
-        sh "aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+        sh "aws ecr get-login-password --region ${env.AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
       }
     }
     stage('Build Image and Generate Security Report using Trivy') {
       steps {
         script {
           dir('backend') {
-            sh "docker build -t ${BACKEND_REPO_URL}:${IMAGE_TAG} ."
-            sh "trivy image ${BACKEND_REPO_URL}:${IMAGE_TAG} > backend_scan.txt"
+            sh "docker build -t ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG} ."
+            sh "trivy image ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG} > backend_scan.txt"
             sh "aws s3 cp backend_scan.txt s3://fp-statefile-bucket/"
-            sh "docker push ${BACKEND_REPO_URL}:${IMAGE_TAG}" 
+            sh "docker push ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}" 
           }
           dir('frontend') {
-            sh "docker build -t ${FRONTEND_REPO_URL}:${IMAGE_TAG} ."
-            sh "trivy image ${FRONTEND_REPO_URL}:${IMAGE_TAG} > frontend_scan.txt"
+            sh "docker build -t ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG} ."
+            sh "trivy image ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG} > frontend_scan.txt"
             sh "aws s3 cp frontend_scan.txt s3://fp-statefile-bucket/"
-            sh "docker push ${FRONTEND_REPO_URL}:${IMAGE_TAG}" 
+            sh "docker push ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}" 
           }
         }
       }
@@ -48,7 +48,7 @@ pipeline {
           sh "sed -i 's|backend-image:latest|${BACKEND_REPO_URL}:${IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
           sh "sed -i 's|frontend-image:latest|${FRONTEND_REPO_URL}:${IMAGE_TAG}|g' ./k8s/frontend_deployment.yaml"
 
-          sh 'git remote set-url origin https://${GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/FinalProject_NTI.git'
+          sh 'git remote set-url origin https://${env.GIT_USER_NAME}:${GITHUB_TOKEN}@github.com/${env0.GIT_USER_NAME}/FinalProject_NTI.git'
           sh 'git pull origin main'
           sh 'git add .'
           sh "git commit -m 'Update deployment image to version ${BUILD_NUMBER}'"
