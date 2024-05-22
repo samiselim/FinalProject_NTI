@@ -1,5 +1,5 @@
 
-058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:15 (debian 10.13)
+058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:16 (debian 10.13)
 ================================================================================
 Total: 2920 (UNKNOWN: 149, LOW: 1108, MEDIUM: 1099, HIGH: 544, CRITICAL: 20)
 
