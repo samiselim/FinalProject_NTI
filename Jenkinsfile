@@ -43,8 +43,6 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'github_tocken', variable: 'GITHUB_TOKEN')]) {
-          sh "pwd"
-          sh "ls"
           sh 'git config user.email "jenkins@gmail.com"'
           sh 'git config user.name "jenkins"'
           sh "sed -i 's|backend-image:latest|${BACKEND_REPO_URL}:${IMAGE_TAG}|g' ./k8s/backend_deployment.yaml"
