@@ -26,15 +26,9 @@ spec:
           name: mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: mongo-root-username
+          value: adminUser
         - name: MONGO_INITDB_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mongo-secret
-              key: mongo-root-password
+          value: adminPassword
         volumeMounts:
         - name: mongo-persistent-storage
           mountPath: /data/db
@@ -49,7 +43,9 @@ spec:
             mongod --bind_ip_all --replSet rs0 --fork --logpath /var/log/mongodb.log;
             until mongo --eval "print(\"waited for connection\")"; do sleep 2; done;
             mongo --eval "rs.initiate()";
+            mongo admin -u ${MONGO_INITDB_ROOT_USERNAME} -p ${MONGO_INITDB_ROOT_PASSWORD} --eval "db.createUser({user: '${MONGO_INITDB_ROOT_USERNAME}', pwd: '${MONGO_INITDB_ROOT_PASSWORD}', roles: [{role: 'root', db: 'admin'}]})";
             touch /data/db/.initialized;
+            mongod --shutdown;
           fi
         volumeMounts:
         - name: mongo-persistent-storage
