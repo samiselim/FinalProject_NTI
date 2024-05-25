@@ -3,7 +3,7 @@
 
 ## Project Overview
 
-This project automates the build, security scan, and deployment of backend and frontend Docker images using Jenkins, AWS ECR, Trivy, and ArgoCD. The pipeline consists of multiple stages that handle different aspects of the CI/CD process, ensuring that the applications are built, scanned for vulnerabilities, and deployed seamlessly.
+This project automates the build, security scan, and deployment of backend and frontend Docker images using Jenkins, AWS ECR, Trivy, and ArgoCD. The pipeline consists of multiple stages that handle different aspects of the CI/CD process, ensuring that the applications are built, scanned for vulnerabilities, and deployed seamlessly. The entire infrastructure is created using Terraform, providing an Infrastructure as Code (IaC) approach for easy management and scalability.
 
 ## Prerequisites
 
@@ -17,25 +17,27 @@ This project automates the build, security scan, and deployment of backend and f
 - ArgoCD
 - AWS CloudWatch Agent (installed on all nodes)
 - AWS Backup Service (configured for daily snapshots of Jenkins instance)
+- Terraform
 
 ## Pipeline Configuration
 
-The Jenkins pipeline is defined inside Jenkinsfile in this Repo 
+The Jenkins pipeline is defined in Jenkinsfile in this Repo
 
 ## Steps to Set Up the Project
 
-1. **Install Jenkins**: Set up Jenkins on your preferred platform using Ansible.
-2. **Configure AWS CLI**: Ensure that AWS CLI is installed and configured with necessary permissions.
-3. **Set Up Docker and Trivy**: Install Docker and Trivy on the Jenkins server.
-4. **Create ECR Repositories**: Create ECR repositories for the backend and frontend images.
-5. **Set Up AWS S3 Bucket**: Create an S3 bucket to store security scan reports.
-6. **Configure Jenkins Credentials**:
+1. **Create Infrastructure with Terraform**: Use Terraform scripts to create the necessary infrastructure on AWS.
+2. **Install Jenkins**: Set up Jenkins on your preferred platform using Ansible.
+3. **Configure AWS CLI**: Ensure that AWS CLI is installed and configured with necessary permissions.
+4. **Set Up Docker and Trivy**: Install Docker and Trivy on the Jenkins server.
+5. **Create ECR Repositories**: Create ECR repositories for the backend and frontend images.
+6. **Set Up AWS S3 Bucket**: Create an S3 bucket to store security scan reports.
+7. **Configure Jenkins Credentials**:
    - AWS credentials (`aws_access_key` and `aws_secret_key`)
    - GitHub token (`github_tocken`)
-7. **Set Up GitHub Repository**: Ensure your codebase is hosted on GitHub.
-8. **ArgoCD Setup**: Install ArgoCD and configure it to sync with your GitHub repository.
-9. **Install CloudWatch Agent**: Use Ansible to install the CloudWatch agent on all nodes.
-10. **Configure AWS Backup**: Set up AWS Backup to take daily snapshots of the Jenkins instance.
+8. **Set Up GitHub Repository**: Ensure your codebase is hosted on GitHub.
+9. **ArgoCD Setup**: Install ArgoCD and configure it to sync with your GitHub repository.
+10. **Install CloudWatch Agent**: Use Ansible to install the CloudWatch agent on all nodes.
+11. **Configure AWS Backup**: Set up AWS Backup to take daily snapshots of the Jenkins instance.
 
 ## ArgoCD Configuration
 
