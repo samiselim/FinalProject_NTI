@@ -14,13 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-<<<<<<< HEAD
-        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:49
-        ports:
-        - containerPort: 80
-=======
         image: your-backend-image
->>>>>>> 377ec02 (Editing Deployments names in K8s Folder)
         env:
         - name: MONGO_URL
           value: "mongodb://apiUser:apiPassword@mongo-0.mongo:27017/todos?authSource=admin"
