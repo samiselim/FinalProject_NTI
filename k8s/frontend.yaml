@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: samiselim/new-front:v7
+        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:34
         ports:
         - containerPort: 80
 
