@@ -2,7 +2,7 @@
 FROM node:14 as build
 
 WORKDIR /usr/src/app
-
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 COPY package*.json ./
 RUN npm install cors
 RUN npm install
