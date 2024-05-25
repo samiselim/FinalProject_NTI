@@ -2,13 +2,12 @@ const express = require("express");
 const cors = require('cors');
 const mongoose = require("mongoose");
 const port = 3000;
-const uri = process.env.MONGO_URL;
 const routes = require("./routes");
 
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(uri, {
+  await mongoose.connect("mongodb://root:123@mongo:27017/todos?authSource=admin", {
     
     useUnifiedTopology: true,
     useNewUrlParser: true,

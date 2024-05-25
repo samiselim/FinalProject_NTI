@@ -17,6 +17,6 @@ spec:
         image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:50
         env:
         - name: MONGO_URL
-          value: "mongodb://apiUser:apiPassword@mongo-0.mongo:27017/todos?authSource=admin"
+          value: "mongodb://root:123@mongo:27017/todos?authSource=admin"
         ports:
         - containerPort: 3000

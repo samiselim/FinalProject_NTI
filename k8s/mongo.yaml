@@ -26,9 +26,9 @@ spec:
           name: mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: adminUser
+          value: root
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: adminPassword
+          value: "123"
         volumeMounts:
         - name: mongo-persistent-storage
           mountPath: /data/db
