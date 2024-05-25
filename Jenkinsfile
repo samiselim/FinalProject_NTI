@@ -24,14 +24,14 @@ pipeline {
         script {
           dir('backend') {
             sh "docker build -t ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG} ."
-            // sh "trivy image ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG} > backend_scan.txt"
-            // sh "aws s3 cp backend_scan.txt s3://fp-statefile-bucket/"
+            sh "trivy image ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG} > backend_scan.txt"
+            sh "aws s3 cp backend_scan.txt s3://fp-statefile-bucket/"
             sh "docker push ${env.BACKEND_REPO_URL}:${env.IMAGE_TAG}" 
           }
           dir('frontend') {
             sh "docker build -t ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG} ."
-            // sh "trivy image ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG} > frontend_scan.txt"
-            // sh "aws s3 cp frontend_scan.txt s3://fp-statefile-bucket/"
+            sh "trivy image ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG} > frontend_scan.txt"
+            sh "aws s3 cp frontend_scan.txt s3://fp-statefile-bucket/"
             sh "docker push ${env.FRONTEND_REPO_URL}:${env.IMAGE_TAG}" 
           }
         }
