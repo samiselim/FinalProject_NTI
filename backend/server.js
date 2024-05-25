@@ -12,7 +12,15 @@ async function main() {
     useNewUrlParser: true,
   });
   const app = express();
-  app.use(cors());
+  
+  // Configure CORS
+  app.use(cors({
+    origin: '*',
+    methods: 'GET,POST,OPTIONS,DELETE,PUT',
+    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
+    credentials: true
+  }));
+  
   app.use(express.json());
   app.use("/api", routes);
 
