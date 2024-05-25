@@ -19,4 +19,4 @@ spec:
         - containerPort: 80
         env:
         - name: MONGO_URL
-          value: "mongo.svc.cluster.local:27017"
+          value: "mongo.default.svc.cluster.local:27017"
