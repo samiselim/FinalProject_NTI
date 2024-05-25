@@ -19,4 +19,4 @@ spec:
         - containerPort: 80
         env:
         - name: MONGO_URL
-          value: "mongodb://apiUser:adminPassword@mongo:27017/todos?authSource=apiUser"
+          value: "mongodb://apiUser:apiPassword@mongo-0.mongo:27017/todos?authSource=admin"
