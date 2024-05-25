@@ -1,5 +1,5 @@
 
-058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:52 (alpine 3.19.1)
+058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-backend-image:53 (alpine 3.19.1)
 =================================================================================
 Total: 9 (UNKNOWN: 0, LOW: 0, MEDIUM: 9, HIGH: 0, CRITICAL: 0)
 
