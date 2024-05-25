@@ -18,6 +18,6 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 
 RUN apk add --no-cache nodejs npm
 
-EXPOSE 3001
+EXPOSE 80
 
 CMD ["sh", "-c", "node /app/server.js & nginx -g 'daemon off;'"]
