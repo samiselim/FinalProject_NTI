@@ -7,10 +7,11 @@ const routes = require("./routes");
 main().catch((err) => console.log(err));
 
 async function main() {
-  const uri = process.env.MONGO_URI;
-  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connected successfully'))
-    .catch(err => console.error('MongoDB connection error:', err));
+  await mongoose.connect("mongodb://apiUser:apiPassword@mongo-0.mongo:27017/todos?authSource=admin", {
+    
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
   const app = express();
   
   // Configure CORS
