@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:47
+        image: 058264315018.dkr.ecr.eu-west-3.amazonaws.com/nti-frontend-image:48
         ports:
         - containerPort: 80
 
