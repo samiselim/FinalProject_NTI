@@ -1,7 +1,7 @@
 ### Project Video : https://drive.google.com/file/d/1RnfyXX13mafBBrro0Eu8afFllFbsMAer/view?usp=sharing
 # NTI Final Project DevOps Automation Track
 ## Project Arch. 
-![Description of GIF](./Poject-Arch.gif)
+![Description of GIF](./Project-Arch.gif)
 ## Project Overview
 
 This project automates the build, security scan, and deployment of backend and frontend Docker images using Jenkins, AWS ECR, Trivy, and ArgoCD. The pipeline consists of multiple stages that handle different aspects of the CI/CD process, ensuring that the applications are built, scanned for vulnerabilities, and deployed seamlessly. The entire infrastructure is created using Terraform, providing an Infrastructure as Code (IaC) approach for easy management and scalability.
